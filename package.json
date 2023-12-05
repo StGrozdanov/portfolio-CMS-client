@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext ts --ext tsx --ext js",
     "type-check": "tsc --pretty --noEmit",
@@ -13,11 +13,11 @@
     "test:e2e": "playwright test tests/e2e",
     "prepare": "husky install"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "npm run lint"
+    ],
+    "*.{js}": "eslint --cache --fix"
   },
   "browserslist": {
     "production": [
@@ -43,6 +43,7 @@
     "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.17",
     "animate.css": "^4.1.1",
+    "eslint-plugin-react-func": "^0.1.18",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "playwright": "^1.40.1",
@@ -55,6 +56,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.40.1",
+    "eslint": "^8.55.0",
     "husky": "^8.0.0"
   }
 }
