@@ -1,0 +1,130 @@
+@mixin fadeInDownAnimation($animation-delay: 0s, $animation-durration: 2s, $distance: 100%) {
+    opacity: 0;
+    transform: translateY(-$distance);
+    -webkit-transform: translateY(-$distance);
+    animation: fadeInDown $animation-durration ease $animation-delay forwards;
+    -webkit-animation: fadeInDown $animation-durration ease $animation-delay forwards;
+}
+
+@mixin fadeInUpAnimation($animation-delay: 0s, $animation-durration: 2s, $distance: 100%) {
+    opacity: 0;
+    transform: translateY($distance);
+    -webkit-transform: translateY($distance);
+    animation: fadeInUp $animation-durration ease $animation-delay forwards;
+    -webkit-animation: fadeInUp $animation-durration ease $animation-delay forwards;
+}
+
+@mixin smoothTransitionHorizontalAnimation($direction: -100%, $durration: 1.5s, $delay: 0) {
+    opacity: 0;
+    transform: translateX($direction);
+    -webkit-transform: translateX($direction);
+    animation: smoothTransition $durration ease forwards;
+    -webkit-animation: smoothTransition $durration ease forwards;
+    animation-delay: $delay;
+    -webkit-animation-delay: $delay;
+}
+
+@mixin smoothTransitionVerticalAnimation($directionX: -100%, $directionY: -100%, $durration: 1.5s) {
+    opacity: 0;
+    transform: translateY($directionY) translateX($directionX);
+    -webkit-transform: translateY($directionY) translateX($directionX);
+    animation: smoothTransitionVertical $durration ease forwards;
+    -webkit-animation: smoothTransitionVertical $durration ease forwards;
+}
+
+@mixin smoothAppearanceAnimation($durration: .5s) {
+    opacity: 1;
+    animation: smoothAppearance $durration ease-in;
+    -webkit-animation: smoothAppearance $durration ease-in;
+}
+
+@mixin zoomInAnimation($durration: 5s) {
+    animation: zoomIn $durration linear infinite;
+    -webkit-animation: zoomIn $durration linear infinite;
+}
+
+@keyframes fadeInDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+        transform: skew(-19deg);
+        -webkit-transform: skew(-19deg);
+    }
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes smoothTransition {
+    to {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+        -webkit-transform: translateX(0) translateY(0);
+    }
+}
+
+@keyframes smoothTransitionVertical {
+    to {
+        opacity: 1;
+        transform: translateY(0) translateX(0);
+        -webkit-transform: translateY(0) translateX(0);
+    }
+}
+
+@keyframes smoothAppearance {
+    from {
+        opacity: 0.1;
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(1.15);
+    }
+
+    10% {
+        transform: scale(1.015);
+    }
+
+    20% {
+        transform: scale(1.03);
+    }
+
+    30% {
+        transform: scale(1.045);
+    }
+
+    40% {
+        transform: scale(1.06);
+    }
+
+    50% {
+        transform: scale(1.075);
+    }
+
+    60% {
+        transform: scale(1.09);
+    }
+
+    70% {
+        transform: scale(1.105);
+    }
+
+    80% {
+        transform: scale(1.12);
+    }
+
+    90% {
+        transform: scale(1.135);
+    }
+
+    100% {
+        transform: scale(1.15);
+    }
+}

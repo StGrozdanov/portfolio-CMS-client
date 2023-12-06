@@ -1,0 +1,41 @@
+.container {
+    position: absolute;
+    left: 20%;
+    top: 45%;
+    background: #D7D9EF;
+    width: 14vw;
+    box-shadow: 0px 15px 20px 0px #808ada75;
+    border-radius: 25px;
+    height: 46vh;
+}
+
+.heading-section {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+
+    h4 {
+        margin: 0;
+    }
+}
+
+.options-container {
+    text-align: center;
+
+    option {
+        margin: 4px auto;
+
+        &:hover {
+            cursor: pointer;
+            background-color:#808ada84;
+            color: white;
+        }
+    }
+}
+
+.selected {
+    background-color:#808ada84;
+    color: white;
+}

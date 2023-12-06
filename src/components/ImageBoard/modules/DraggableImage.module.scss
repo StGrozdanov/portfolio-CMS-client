@@ -1,0 +1,68 @@
+@use 'src/scss/common/animations' as *;
+
+.container {
+    width: 220px;
+    height: 150px;
+    display: flex;
+    align-content: center;
+    border-radius: 20px;
+    box-shadow: 0px 4px 15px 0px #808ada75;
+    margin-bottom: 30px;
+    position: relative;
+    @include smoothTransitionHorizontalAnimation($direction: -50%, $durration: 500ms);
+
+    &:hover {
+        cursor: pointer;
+
+        .hover-layer {
+            height: 100%
+        }
+
+        .hover-link-icon {
+            display: initial;
+        }
+    }
+
+    .hover-layer {
+        height: 0;
+        width: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.6), #483d8bba);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        overflow: hidden;
+        transition: height 400ms;
+        z-index: 2;
+    }
+
+    .hover-link-icon {
+        font-size: 2.5rem;
+        display: none;
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        transform: translate(-40%, -45%);
+        color: white;
+        font-weight: bolder;
+        z-index: 2;
+    }
+
+    .move-icon {
+        font-size: 1rem;
+        color: #483d8bba;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 3;
+
+        &:hover {
+            color: white;
+        }
+    }
+
+    img {
+        width: 100%;
+        border-radius: 20px;
+    }
+}

@@ -1,0 +1,16 @@
+.admin-panel-content-header {
+    display: flex;
+    background-color: inherit;
+    border-radius: 20px;
+    border-bottom: 5px solid white;
+    justify-content: space-between;
+    padding: 18px;
+
+    .admin-panel-content-header-greeting-article {
+        width: 100%;
+
+        h2 {
+            text-align: center;
+        }
+    }
+}

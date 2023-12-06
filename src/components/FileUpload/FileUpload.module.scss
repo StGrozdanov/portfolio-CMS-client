@@ -1,0 +1,25 @@
+.container {
+    position: relative;
+
+    svg {
+        cursor: pointer;
+    }
+
+    .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #d7daef;
+        color: black;
+        text-align: center;
+        border-radius: 20px;
+        padding: 5px 0;
+        position: absolute;
+        bottom: -90%;
+        right: -200%;
+        z-index: 1;
+    }
+
+    &:hover .tooltiptext {
+        visibility: visible;
+    }
+}

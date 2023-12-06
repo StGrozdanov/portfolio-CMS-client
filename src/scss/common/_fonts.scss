@@ -1,0 +1,29 @@
+@use "sass:map";
+
+$fonts-weights: (
+    "descritpion": (
+        "light": 300,
+        "regular": 400,
+        "medium": 500,
+        "semi-bold": 600,
+        "bold": 700,
+    ),
+    "heading": (
+        "regular": 400,
+        "bold": 700,
+        "bolder": 900,
+    )
+);
+
+@mixin descriptionFont($font-weight: "regular", $size: .85rem, $line-height: 1rem) {
+    font-family: Source Code Pro, monospace;
+    font-weight: map.get(map.get($fonts-weights, "descritpion"), $font-weight);
+    font-size: $size;
+    line-height: $line-height;
+}
+
+@mixin customHeadingFont($font-weight: "bold", $size: 2.7rem) {
+    font-family: Nunito Sans;
+    font-weight: map.get(map.get($fonts-weights, "heading"), $font-weight);
+    font-size: $size;
+}

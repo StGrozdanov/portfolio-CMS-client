@@ -1,0 +1,60 @@
+.admin-panel-section {
+    background: #EFEEFE;
+    min-height: 100vh;
+    display: flex;
+    padding: 0px 6vw;
+    justify-content: space-evenly;
+}
+
+.admin-panel-section-wrapper {
+    height: 91vh;
+    width: 75vw;
+    display: flex;
+    align-self: center;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    border: 2px;
+    border-radius: 20px;
+    background: #F0F2FF;
+    box-shadow: 0px 15px 20px 0px #808ada75;
+}
+
+.admin-panel-content-footer {
+    background: inherit;
+    display: block;
+}
+
+.admin-panel-content {
+    width: 98%;
+    height: 97%;
+    border: 2px;
+    border-radius: 20px;
+    background: #F0F2FF;
+    box-shadow: 0px 15px 20px 0px #808adabd;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.admin-panel-content::-webkit-scrollbar {
+    display: none;
+}
+
+.admin-panel-content-main {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    ::-moz-selection {
+        color: white;
+        background: #808ada84;
+    }
+    
+    ::selection {
+        color: white;
+        background: #808ada84;
+    }
+}

@@ -1,0 +1,19 @@
+.stats-graph {
+    margin-top: 30px;
+    margin-left: 240px;
+    width: 51vw;
+    border-radius: 20px;
+    background: #D7D9EF;
+    box-shadow: 2px 20px 20px 0px #808ada61;
+    max-height: 45vh;
+}
+
+.chart {
+    position: relative;
+    width: 100%;
+    max-height: 45vh;
+
+    svg {
+        border-radius: 0;
+    }
+}
