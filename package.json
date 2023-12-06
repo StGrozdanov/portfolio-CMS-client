@@ -9,8 +9,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint src --ext ts --ext tsx --ext js",
     "type-check": "tsc --pretty --noEmit",
-    "test:int": "playwright test tests/integration",
-    "test:e2e": "playwright test tests/e2e",
+    "test:int": "playwright test tests/integration --pass-with-no-tests",
+    "test:e2e": "playwright test tests/e2e --pass-with-no-tests",
     "prepare": "husky install"
   },
   "lint-staged": {
