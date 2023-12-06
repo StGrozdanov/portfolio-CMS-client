@@ -18,4 +18,9 @@ describe('greeting function', () => {
         const greeting = getGreeting({ currentHour: date });
         expect(greeting).toBe('Good Evening');
     });
+
+    it('should return a greeting without passing date as parameter', () => {
+        const greeting = getGreeting();
+        expect(greeting).toContain('Good ');
+    });
 });
