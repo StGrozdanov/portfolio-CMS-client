@@ -13,36 +13,36 @@ export const portfolioAPI = {
             url: '/users/basic-info'
         });
         const result = await response.data;
-        return result.length > 0 ? result[0] : Promise.reject('No user info returned from the API');
+        return result ? result : Promise.reject('No user info returned from the API');
     },
     getAboutMeInfo: async (): Promise<AboutMeResponse> => {
         const response = await portfolioApiInstance.request({
             method: "GET",
-            url: '/users/user-skills'
+            url: '/users/skills'
         });
         const result = await response.data;
-        return result.length > 0 ? result[0] : Promise.reject('No response returned from the API');
+        return result ? result : Promise.reject('No response returned from the API');
     },
     getJobsAndProjectsInfo: async (): Promise<JobsAndProjectsResponse> => {
         const response = await portfolioApiInstance.request({
             method: "GET",
-            url: '/users/user-jobs-and-projects'
+            url: '/users/jobs-and-projects'
         });
         const result = await response.data;
-        return result.length > 0 ? result[0] : Promise.reject('No response returned from the API');
+        return result ? result : Promise.reject('No response returned from the API');
     },
     getSocialsInfo: async (): Promise<SocialsResponse> => {
         const response = await portfolioApiInstance.request({
             method: "GET",
-            url: '/users/user-socials'
+            url: '/users/socials'
         });
         const result = await response.data;
-        return result.length > 0 ? result[0] : Promise.reject('No response returned from the API');
+        return result  ? result : Promise.reject('No response returned from the API');
     },
     authenticate: async (data: AuthData): Promise<LoginResponse> => {
         const response = await portfolioApiInstance.request({
             method: "POST",
-            url: '/login',
+            url: '/auth/login',
             data
         });
         const result = await response.data;
@@ -69,52 +69,48 @@ export const portfolioAPI = {
     uploadCV: async (data: FormData, authToken: string): Promise<void> => {
         const response = await portfolioApiInstance.request({
             method: "POST",
-            url: '/upload-cv',
+            url: '/files/cv',
             data,
             headers: { 'X-Authorization': authToken }
         });
         return response.status === 201 ? Promise.resolve() : Promise.reject('No response returned from the API');
     },
-    uploadProjectImage: async (data: FormData, authToken: string, projectTitle: string): Promise<ProjectsUpdateResponse[]> => {
+    uploadProjectImage: async (data: FormData, authToken: string, projectTitle: string): Promise<ProjectsUpdateResponse> => {
+        data.append('projectTitle', projectTitle);
         const response = await portfolioApiInstance.request({
             method: "POST",
-            url: '/upload-project-image',
-            data: {
-                data,
-                targetResourceTitle: projectTitle,
-            },
-            headers: { 'X-Authorization': authToken }
-        });
-        const result = await response.data;
-        return response.status === 201 ? result : Promise.reject('No response returned from the API');
-    },
-    uploadJobImage: async (data: FormData, authToken: string, companyName: string): Promise<JobsUpdateResponse[]> => {
-        const response = await portfolioApiInstance.request({
-            method: "POST",
-            url: '/upload-job-image',
-            data: {
-                data,
-                targetResourceTitle: companyName,
-            },
-            headers: { 'X-Authorization': authToken }
-        });
-        const result = await response.data;
-        return response.status === 201 ? result : Promise.reject('No response returned from the API');
-    },
-    uploadPartnerLogo: async (data: FormData, authToken: string): Promise<PartnersUpdateResponse[]> => {
-        const response = await portfolioApiInstance.request({
-            method: "POST",
-            url: '/add-partners',
+            url: '/files/project-image',
             data,
             headers: { 'X-Authorization': authToken }
         });
         const result = await response.data;
         return response.status === 201 ? result : Promise.reject('No response returned from the API');
     },
-    uploadCarouselImage: async (data: FormData, authToken: string): Promise<CarouselsUpdateResponse[]> => {
+    uploadJobImage: async (data: FormData, authToken: string, companyName: string): Promise<JobsUpdateResponse> => {
+        data.append('companyName', companyName);
         const response = await portfolioApiInstance.request({
             method: "POST",
-            url: '/add-carousel',
+            url: '/files/job-image',
+            data,
+            headers: { 'X-Authorization': authToken }
+        });
+        const result = await response.data;
+        return response.status === 201 ? result : Promise.reject('No response returned from the API');
+    },
+    uploadPartnerLogo: async (data: FormData, authToken: string): Promise<PartnersUpdateResponse> => {
+        const response = await portfolioApiInstance.request({
+            method: "POST",
+            url: '/files/partners',
+            data,
+            headers: { 'X-Authorization': authToken }
+        });
+        const result = await response.data;
+        return response.status === 201 ? result : Promise.reject('No response returned from the API');
+    },
+    uploadCarouselImage: async (data: FormData, authToken: string): Promise<CarouselsUpdateResponse> => {
+        const response = await portfolioApiInstance.request({
+            method: "POST",
+            url: '/files/carousel',
             data,
             headers: { 'X-Authorization': authToken }
         });
@@ -133,7 +129,7 @@ export const portfolioAPI = {
     deleteImage: async (data: { imageURL: string }, authToken: string): Promise<void> => {
         const response = await portfolioApiInstance.request({
             method: "DELETE",
-            url: '/image',
+            url: '/files/image',
             data,
             headers: { 'X-Authorization': authToken }
         });
@@ -142,7 +138,7 @@ export const portfolioAPI = {
     updateUserSkills: async (data: AboutMeRequest, authToken: string): Promise<void> => {
         const response = await portfolioApiInstance.request({
             method: "PUT",
-            url: '/users/user-skills',
+            url: '/users/skills',
             data,
             headers: { 'X-Authorization': authToken }
         });
@@ -151,7 +147,7 @@ export const portfolioAPI = {
     updateUserSocials: async (data: SocialMediaInput, authToken: string): Promise<void> => {
         const response = await portfolioApiInstance.request({
             method: "PUT",
-            url: '/users/user-socials',
+            url: '/users/socials',
             data,
             headers: { 'X-Authorization': authToken }
         });
@@ -160,7 +156,7 @@ export const portfolioAPI = {
     updateUserJobsAndProjects: async ({ data, authToken }: JobsAndProjectsInput): Promise<void> => {
         const response = await portfolioApiInstance.request({
             method: "PUT",
-            url: '/users/user-jobs-and-projects',
+            url: '/users/jobs-and-projects',
             data,
             headers: { 'X-Authorization': authToken }
         });

@@ -91,7 +91,7 @@ export default function ProjectsTemplate({ projectName }: ProjectsTemplateProps)
             <ImageBoard
                 heading="Project Images"
                 imageCollection={project ? project.imgUrl : []}
-                uploadType="updateJobImage"
+                uploadType="updateProjectImage"
                 tip="Upload"
                 limit={2}
                 updateStateHandler={updateProjectImagesHandler}

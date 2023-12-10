@@ -38,22 +38,22 @@ export const fileUploadHandler = async ({
     switch (uploadType) {
         case "addCarousel":
             response = await uploadEndpoints.addCarousel(formData, token);
-            result = response.length > 0 ? response[0].carousel_images : [];
+            result = response  ? response.carousel_images : [];
             break;
         case "addPartners":
             response = await uploadEndpoints.addPartners(formData, token);
-            result = response.length > 0 ? response[0].partners : [];
+            result = response ? response.partners : [];
             break;
         case "uploadCV":
             response = await uploadEndpoints.uploadCV(formData, token);
             break;
         case "updateJobImage":
             response = await uploadEndpoints.updateJobImage(formData, token, companyName as string);
-            result = response.length > 0 ? response[0].job_images : [];
+            result = response ? response.job_images : [];
             break;
         case "updateProjectImage":
             response = await uploadEndpoints.updateProjectImage(formData, token, projectTitle as string);
-            result = response.length > 0 ? response[0].project_images : [];
+            result = response ? response.project_images : [];
             break;
         default:
             break;
