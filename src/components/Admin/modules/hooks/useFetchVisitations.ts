@@ -26,8 +26,7 @@ export function useFetchVisitations(query: number | "today" | "yesterday" | "las
                 const visitationsAnalytics = response[0];
                 const visitationsTodayCount = response[1];
 
-
-                if (query !== 'today') {
+                if (query !== 'today' && query !== 'yesterday') {
                     for (let index = 0; index < visitationsAnalytics.results.length; index++) {
                         const currDate = moment(visitationsAnalytics.results[index].date).utc(true).format('YYYY-MM-DD');
                         const searchedIndex = index + 1 < visitationsAnalytics.results.length ? index + 1 : 0;
