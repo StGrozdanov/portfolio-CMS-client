@@ -8,7 +8,7 @@ import { useFetchVisitations } from "../../hooks/useFetchVisitations";
 
 export default function Dashboard() {
     const [filter, setFilter] = useState<number | "today" | "yesterday" | "last7days" | "last30days" | "last90days" | "lastYear">('today');
-    const { visitationsData, chartData } = useFetchVisitations(filter);
+    const { visitationsData, chartData, chartType } = useFetchVisitations(filter);
 
     return (
         <>
@@ -29,7 +29,7 @@ export default function Dashboard() {
                 icon={faEye}
                 value={visitationsData?.todayVisitationCount} />
             <ChartFilter filter={setFilter} />
-            <VisitationsChart data={chartData} />
+            <VisitationsChart data={chartData} chartType={chartType} />
         </>
     );
 }

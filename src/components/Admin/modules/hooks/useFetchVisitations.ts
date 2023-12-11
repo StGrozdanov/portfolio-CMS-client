@@ -2,17 +2,29 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { AnalyticData } from "../../../../services/interfaces/portfolio-service-interfaces";
 import { portfolioAPI } from "../../../../services/portfolio-service";
+import { GoogleChartWrapperChartType } from "react-google-charts";
 import moment from "moment";
+
+interface VisitationsHookReponse {
+    visitationsData: AnalyticData | undefined,
+    chartData: [[string, number]] | undefined,
+    chartType: GoogleChartWrapperChartType,
+}
 
 /**
  * Hook that fetches visitations data
  * @param query the filter - it can be quarter eg 1 2 3 4 (this is when we use number) or variation of strings
  * @returns the visitation data for the selected period along with formatted chart to visualise it
  */
-export function useFetchVisitations(query: number | "today" | "yesterday" | "last7days" | "last30days" | "last90days" | "lastYear") {
+export function useFetchVisitations(query: number | "today" | "yesterday" | "last7days" | "last30days" | "last90days" | "lastYear"): VisitationsHookReponse {
     const [visitationsData, setVisitationsData] = useState<AnalyticData>();
-    const [chartData, setChartData] = useState();
+    const [chartData, setChartData] = useState<[[string, number]]>();
     const { token } = useAuthContext();
+
+    const chartType: GoogleChartWrapperChartType =
+        query === 'today' || query === 'yesterday'
+            ? 'BarChart'
+            : 'AreaChart';
 
     useEffect(() => {
         const analytics = portfolioAPI.getAnalythics(query, token);
@@ -59,5 +71,9 @@ export function useFetchVisitations(query: number | "today" | "yesterday" | "las
             .catch(err => console.error(err));
     }, [query]);
 
-    return { visitationsData, chartData };
+    return {
+        visitationsData,
+        chartData,
+        chartType
+    };
 }
