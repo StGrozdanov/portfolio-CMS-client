@@ -23,12 +23,15 @@ export function useFetchVisitations(query: number | "today" | "yesterday" | "las
             .then(response => {
                 const chartResult: any = [["Date", "Visitations"]];
                 let visitationsCountForTheDate = 1;
+                const visitationsAnalytics = response[0];
+                const visitationsTodayCount = response[1];
+
 
                 if (query !== 'today') {
-                    for (let index = 0; index < response[0].results.length; index++) {
-                        const currDate = moment(response[0].results[index].date).utc(true).format('YYYY-MM-DD');
-                        const searchedIndex = index + 1 < response[0].results.length ? index + 1 : 0;
-                        const nextDate = moment(response[0].results[searchedIndex]?.date).utc(true).format('YYYY-MM-DD');
+                    for (let index = 0; index < visitationsAnalytics.results.length; index++) {
+                        const currDate = moment(visitationsAnalytics.results[index].date).utc(true).format('YYYY-MM-DD');
+                        const searchedIndex = index + 1 < visitationsAnalytics.results.length ? index + 1 : 0;
+                        const nextDate = moment(visitationsAnalytics.results[searchedIndex]?.date).utc(true).format('YYYY-MM-DD');
 
                         if (currDate === nextDate) {
                             visitationsCountForTheDate++;
@@ -40,8 +43,8 @@ export function useFetchVisitations(query: number | "today" | "yesterday" | "las
                     }
                     setChartData(chartResult);
                 } else {
-                    for (let index = 0; index < response[0].results.length; index++) {
-                        const currDate = moment(response[0].results[index].date).utc(true).format('HH:mm');
+                    for (let index = 0; index < visitationsAnalytics.results.length; index++) {
+                        const currDate = moment(visitationsAnalytics.results[index].date).utc(true).format('HH:mm');
                         chartResult.push([currDate, visitationsCountForTheDate]);
                     }
                     setChartData(chartResult);
@@ -49,8 +52,8 @@ export function useFetchVisitations(query: number | "today" | "yesterday" | "las
 
                 setVisitationsData(
                     {
-                        ...response[0],
-                        todayVisitationCount: response[1][0].today_visitations_count as unknown as number
+                        ...visitationsAnalytics,
+                        todayVisitationCount: visitationsTodayCount.count
                     }
                 );
             })

@@ -142,7 +142,7 @@ export interface Visitation {
 }
 
 export interface VisitationCountResponse {
-    today_visitations_count: string,
+    count: number,
 }
 
 export interface AnalyticData extends AnalyticsResponse {

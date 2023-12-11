@@ -57,7 +57,7 @@ export const portfolioAPI = {
         const result = await response.data;
         return result ? result : Promise.reject('No response returned from the API');
     },
-    getAnalythicsForTodayCount: async (authToken: string): Promise<VisitationCountResponse[]> => {
+    getAnalythicsForTodayCount: async (authToken: string): Promise<VisitationCountResponse> => {
         const response = await portfolioApiInstance.request({
             method: "GET",
             url: `/analytics/count`,

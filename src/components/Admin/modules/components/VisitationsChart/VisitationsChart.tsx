@@ -6,15 +6,21 @@ interface ChartProps {
     data: any | any[] | undefined,
 }
 
-export default function VisitationsChart({ data } : ChartProps) {
+export default function VisitationsChart({ data }: ChartProps) {
     return (
         <article className={styles["stats-graph"]}>
             <div className={styles.chart}>
-                <Chart
-                    chartType="AreaChart"
-                    data={data}
-                    options={options}
-                />
+                {
+                    data && data.length > 1
+                        ? <Chart
+                            chartType="AreaChart"
+                            data={data}
+                            options={options}
+                        />
+                        : <span className={styles['no-data']}>
+                            <h4>No visitations data for the selected period</h4>
+                        </span>
+                }
             </div>
         </article>
     );
