@@ -3,12 +3,20 @@ import TextArea from '../../../../../TextArea/TextArea';
 import styles from '../ProjectsAndJobs.module.scss';
 import ImageBoard from '../../../../../ImageBoard/ImageBoard';
 import { useJobsTemplate } from './hooks/useJobsTemplate';
+import { useJobsAndProjectsContext } from '../../../../../../hooks/useJobsAndProjectsContext';
+import { useModalContext } from '../../../../../../hooks/useModalContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 interface JobsTemplateProps {
     companyName: string,
+    typeSetter: (type: string) => void,
 }
 
-export default function JobsTemplate({ companyName }: JobsTemplateProps) {
+export default function JobsTemplate({ companyName, typeSetter }: JobsTemplateProps) {
+    const { removeJobByCompanyName } = useJobsAndProjectsContext();
+    const confirmModal = useModalContext();
+
     const {
         job,
         updateJobCompanyNameHandler,
@@ -20,9 +28,28 @@ export default function JobsTemplate({ companyName }: JobsTemplateProps) {
         updateJobTechStackHandler,
         updateJobTitleHandler,
     } = useJobsTemplate(companyName);
+
     return (
         <div className="animate__animated animate__fadeInLeft">
             <section className={styles['basic-info']}>
+                <section className={styles['icons-container']}>
+                    <FontAwesomeIcon
+                        icon={faTrashCan}
+                        className={styles.remove}
+                        onClick={() => {
+                            confirmModal({ title: 'Are you sure you want to delete this project?' })
+                                .then(() => {
+                                    removeJobByCompanyName(job?.company || '');
+                                    typeSetter('job');
+                                })
+                                .catch(() => console.info('action canceled.'))
+                        }}
+                    />
+                    <FontAwesomeIcon
+                        icon={faPlusCircle}
+                        className={styles['add-new']}
+                    />
+                </section>
                 <Input
                     requestHandler={updateJobCompanyNameHandler}
                     placeholder='Company'

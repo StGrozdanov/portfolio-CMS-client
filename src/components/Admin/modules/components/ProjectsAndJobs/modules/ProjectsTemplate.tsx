@@ -1,16 +1,23 @@
-import { faCode, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faCode, faGlobe, faPlusCircle, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import AnimatedIconInput from "../../../../../Input/AnimatedIconInput/AnimatedIconInput";
 import Input from "../../../../../Input/Input";
 import TextArea from "../../../../../TextArea/TextArea";
 import styles from '../ProjectsAndJobs.module.scss';
 import ImageBoard from "../../../../../ImageBoard/ImageBoard";
 import { useProjectsTemplate } from "./hooks/useProjectsTemplate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useJobsAndProjectsContext } from "../../../../../../hooks/useJobsAndProjectsContext";
+import { useModalContext } from "../../../../../../hooks/useModalContext";
 
 interface ProjectsTemplateProps {
     projectName: string,
+    typeSetter: (type: string) => void,
 }
 
-export default function ProjectsTemplate({ projectName }: ProjectsTemplateProps) {
+export default function ProjectsTemplate({ projectName, typeSetter }: ProjectsTemplateProps) {
+    const { removeProjectByTitle } = useJobsAndProjectsContext();
+    const confirmModal = useModalContext();
+
     const {
         project,
         updateProjectConceptHandler,
@@ -23,8 +30,27 @@ export default function ProjectsTemplate({ projectName }: ProjectsTemplateProps)
         updateProjectTechStackHandler,
         updateProjectTitleHandler,
     } = useProjectsTemplate(projectName);
+
     return (
         <div className="animate__animated animate__fadeInLeft">
+            <section className={styles['icons-container']}>
+                <FontAwesomeIcon
+                    icon={faTrashCan}
+                    className={styles.remove}
+                    onClick={() => {
+                        confirmModal({ title: 'Are you sure you want to delete this project?' })
+                            .then(() => {
+                                removeProjectByTitle(project?.title || '');
+                                typeSetter('project');
+                            })
+                            .catch(() => console.info('action canceled.'))
+                    }}
+                />
+                <FontAwesomeIcon
+                    icon={faPlusCircle}
+                    className={styles['add-new']}
+                />
+            </section>
             <section className={styles['basic-info']} style={{ justifyContent: 'space-between' }}>
                 <Input
                     requestHandler={updateProjectTitleHandler}

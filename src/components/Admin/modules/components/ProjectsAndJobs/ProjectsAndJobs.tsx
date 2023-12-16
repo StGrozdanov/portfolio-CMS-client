@@ -49,9 +49,9 @@ export default function ProjectsAndJobs() {
             </section>
             {
                 type === 'Project'
-                    ? <ProjectsTemplate projectName={options} />
+                    ? <ProjectsTemplate typeSetter={typeClickHandler} projectName={options} />
                     : type === 'Job'
-                        ? <JobsTemplate companyName={options} />
+                        ? <JobsTemplate typeSetter={typeClickHandler} companyName={options} />
                         : null
             }
         </article>

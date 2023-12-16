@@ -46,7 +46,9 @@ function App() {
                     <Route path='/admin/projects-and-jobs' element={(
                         <ProtectedRoute>
                             <AdminRoot>
-                                <ProjectsAndJobs />
+                                <ModalProvider>
+                                    <ProjectsAndJobs />
+                                </ModalProvider>
                             </AdminRoot>
                         </ProtectedRoute>
                     )} />
