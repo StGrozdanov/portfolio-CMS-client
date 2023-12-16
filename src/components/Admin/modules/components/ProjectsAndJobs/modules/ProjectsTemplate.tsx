@@ -8,6 +8,7 @@ import { useProjectsTemplate } from "./hooks/useProjectsTemplate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useJobsAndProjectsContext } from "../../../../../../hooks/useJobsAndProjectsContext";
 import { useModalContext } from "../../../../../../hooks/useModalContext";
+import { useProjectInputModalContext } from "../../../../../../hooks/useJobInputModalContext";
 
 interface ProjectsTemplateProps {
     projectName: string,
@@ -15,8 +16,9 @@ interface ProjectsTemplateProps {
 }
 
 export default function ProjectsTemplate({ projectName, typeSetter }: ProjectsTemplateProps) {
-    const { removeProjectByTitle } = useJobsAndProjectsContext();
+    const { removeProjectByTitle, addProject } = useJobsAndProjectsContext();
     const confirmModal = useModalContext();
+    const projectInputModal = useProjectInputModalContext();
 
     const {
         project,
@@ -49,6 +51,14 @@ export default function ProjectsTemplate({ projectName, typeSetter }: ProjectsTe
                 <FontAwesomeIcon
                     icon={faPlusCircle}
                     className={styles['add-new']}
+                    onClick={() => {
+                        projectInputModal({
+                            title: 'Add new Project',
+                            updateStateHandler: addProject,
+                        })
+                            .then(() => console.info('confirmed'))
+                            .catch(() => console.info('canceled'))
+                    }}
                 />
             </section>
             <section className={styles['basic-info']} style={{ justifyContent: 'space-between' }}>

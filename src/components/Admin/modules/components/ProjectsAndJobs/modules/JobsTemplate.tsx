@@ -7,6 +7,7 @@ import { useJobsAndProjectsContext } from '../../../../../../hooks/useJobsAndPro
 import { useModalContext } from '../../../../../../hooks/useModalContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { useJobInputModalContext } from '../../../../../../hooks/useProjectInputModalContext';
 
 interface JobsTemplateProps {
     companyName: string,
@@ -14,8 +15,9 @@ interface JobsTemplateProps {
 }
 
 export default function JobsTemplate({ companyName, typeSetter }: JobsTemplateProps) {
-    const { removeJobByCompanyName } = useJobsAndProjectsContext();
+    const { removeJobByCompanyName, addJob } = useJobsAndProjectsContext();
     const confirmModal = useModalContext();
+    const jobInputModal = useJobInputModalContext();
 
     const {
         job,
@@ -48,6 +50,14 @@ export default function JobsTemplate({ companyName, typeSetter }: JobsTemplatePr
                     <FontAwesomeIcon
                         icon={faPlusCircle}
                         className={styles['add-new']}
+                        onClick={() => {
+                            jobInputModal({
+                                title: 'Add new Job',
+                                updateStateHandler: addJob,
+                            })
+                                .then(() => console.info('confirmed'))
+                                .catch(() => console.info('canceled'))
+                        }}
                     />
                 </section>
                 <Input

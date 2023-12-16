@@ -11,6 +11,8 @@ import ProjectsAndJobs from './components/Admin/modules/components/ProjectsAndJo
 import Socials from './components/Admin/modules/components/Socials/Socials';
 import { AuthProvider } from './contexts/AuthContext';
 import { JobsAndProjectsProvider } from './contexts/JobsAndProjectsContext';
+import { JobInputModalProvider } from './contexts/JobInputModalContext';
+import { ProjectInputModalProvider } from './contexts/ProjectInputModalContext';
 
 function App() {
     return (
@@ -46,9 +48,13 @@ function App() {
                     <Route path='/admin/projects-and-jobs' element={(
                         <ProtectedRoute>
                             <AdminRoot>
-                                <ModalProvider>
-                                    <ProjectsAndJobs />
-                                </ModalProvider>
+                                <ProjectInputModalProvider>
+                                    <JobInputModalProvider>
+                                        <ModalProvider>
+                                            <ProjectsAndJobs />
+                                        </ModalProvider>
+                                    </JobInputModalProvider>
+                                </ProjectInputModalProvider>
                             </AdminRoot>
                         </ProtectedRoute>
                     )} />
