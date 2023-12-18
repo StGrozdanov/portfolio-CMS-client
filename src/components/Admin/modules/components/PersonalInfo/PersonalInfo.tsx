@@ -47,7 +47,7 @@ export default function PersonalInfo() {
                 />
                 <ImageBoard
                     heading="Partners Banners"
-                    imageCollection={basicUserInfo ? basicUserInfo.partners : []}
+                    imageCollection={basicUserInfo ? basicUserInfo.partners.map(partner => partner.imgURL) : []}
                     updateStateHandler={updatePartnersHandler}
                     uploadType="addPartners"
                     tip="Upload banner"

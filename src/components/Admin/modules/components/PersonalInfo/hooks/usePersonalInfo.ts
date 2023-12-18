@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BasicInfoResponse, CarouselImage } from "../../../../../../services/interfaces/portfolio-service-interfaces";
+import { BasicInfoResponse, CarouselImage, ImageObject } from "../../../../../../services/interfaces/portfolio-service-interfaces";
 import { useAuthContext } from "../../../../../../hooks/useAuthContext";
 import { portfolioAPI } from "../../../../../../services/portfolio-service";
 
@@ -28,13 +28,22 @@ export const usePersonalInfo = () => {
      * Handler that updates partner images, sends them into the server and into the react state.
      * @argument string[] of partner images.
      */
-    const updatePartnersHandler = (partners: string[]) => {
+    const updatePartnersHandler = (partners: ImageObject[]) => {
         if (basicUserInfo) {
             setBasicUserInfo((oldState) => {
-                portfolioAPI
-                    .updateBaseUserInfo({ ...basicUserInfo, partners, id: 1 }, token)
-                    .then(response => console.error(response))
-                    .catch(error => console.error(error));
+                if (!partners[0].height) {
+                    const updatedPartners = oldState?.partners.map((partner, index) => ({
+                        ...partner,
+                        imgURL: partners[index],
+                    })).filter(partner => partner.imgURL) as unknown as ImageObject[];
+
+                    portfolioAPI
+                        .updateBaseUserInfo({ ...basicUserInfo, partners: updatedPartners, id: 1 }, token)
+                        .then(response => console.error(response))
+                        .catch(error => console.error(error));
+
+                    return { ...oldState as BasicInfoResponse, partners: updatedPartners }
+                }
                 return { ...oldState as BasicInfoResponse, partners }
             });
         }
@@ -86,11 +95,11 @@ export const usePersonalInfo = () => {
         }
     }
 
-     /**
-     * Handler that updates email of the user, sends it into the server and into the react state.
-     * @argument string email.
-     */
-     const updateEmailRequestHandler = (email: string) => {
+    /**
+    * Handler that updates email of the user, sends it into the server and into the react state.
+    * @argument string email.
+    */
+    const updateEmailRequestHandler = (email: string) => {
         if (basicUserInfo) {
             setBasicUserInfo((oldState) => {
                 if (!oldState) {

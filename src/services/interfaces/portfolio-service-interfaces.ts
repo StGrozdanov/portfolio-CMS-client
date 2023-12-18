@@ -9,11 +9,17 @@ export interface CarouselImage {
     data: CarouselImageData,
 }
 
+export interface ImageObject {
+    imgURL: string,
+    width: number,
+    height: number,
+}
+
 export interface BasicInfoResponse {
     email: string,
     cvLink: string,
     aboutMe: string,
-    partners: string[],
+    partners: ImageObject[],
     carousel: CarouselImage[],
 }
 

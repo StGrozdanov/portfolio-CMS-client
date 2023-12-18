@@ -11,7 +11,7 @@ import { useCarouselInputModalContext } from '../../hooks/useCarouselInputModalC
 
 interface ImageBoardProps {
     imageCollection: string[],
-    updateStateHandler: (updatedImageCollection: string[]) => void,
+    updateStateHandler: (updatedImageCollection: any[]) => void,
     updateFromInputHandler?: (...args: any[]) => void,
     uploadType: 'uploadCV' | 'updateProjectImage' | 'updateJobImage' | 'addPartners' | 'addCarousel',
     heading: string,
