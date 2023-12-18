@@ -24,7 +24,7 @@ const initialJobState: JobDetails = {
     concept: "",
     achievements: [],
     techStack: [],
-    imgUrl: [],
+    images: [],
 }
 
 export const JobInputModalProvider = ({ children }: ContainerProps) => {

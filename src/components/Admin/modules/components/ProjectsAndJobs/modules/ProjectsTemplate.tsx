@@ -126,7 +126,7 @@ export default function ProjectsTemplate({ projectName, typeSetter }: ProjectsTe
             </section>
             <ImageBoard
                 heading="Project Images"
-                imageCollection={project ? project.imgUrl : []}
+                imageCollection={project ? project.images.map(image => image.imgURL) : []}
                 uploadType="updateProjectImage"
                 tip="Upload"
                 limit={2}

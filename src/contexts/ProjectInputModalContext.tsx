@@ -18,7 +18,7 @@ export const ProjectInputModalContext = createContext<ProjectInputModalContextTy
 
 const initialProjectState: ProjectsDetails = {
     title: "",
-    imgUrl: [],
+    images: [],
     startedAt: new Date,
     endedAt: null,
     description: "",

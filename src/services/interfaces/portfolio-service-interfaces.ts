@@ -38,11 +38,11 @@ export interface CarouselsUpdateResponse {
 }
 
 export interface JobsUpdateResponse {
-    job_images: string[],
+    job_images: ImageObject[],
 }
 
 export interface ProjectsUpdateResponse {
-    project_images: string[],
+    project_images: ImageObject[],
 }
 
 export interface AboutMeResponse {
@@ -104,7 +104,7 @@ export interface JobsAndProjectsInput {
 
 export interface JobDetails {
     company: string,
-    imgUrl: string[],
+    images: ImageObject[],
     title: string,
     started_at: Date,
     ended_at: Date | null,
@@ -115,7 +115,7 @@ export interface JobDetails {
 
 export interface ProjectsDetails {
     title: string,
-    imgUrl: string[],
+    images: ImageObject[],
     startedAt: Date,
     endedAt: Date | null,
     description: string,

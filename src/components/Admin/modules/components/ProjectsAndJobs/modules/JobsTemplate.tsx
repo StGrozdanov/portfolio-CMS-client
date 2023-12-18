@@ -118,7 +118,7 @@ export default function JobsTemplate({ companyName, typeSetter }: JobsTemplatePr
             </section>
             <ImageBoard
                 heading="Job Images"
-                imageCollection={job?.imgUrl || []}
+                imageCollection={job?.images.map(image => image.imgURL) || []}
                 uploadType="updateJobImage"
                 tip="Upload"
                 limit={2}

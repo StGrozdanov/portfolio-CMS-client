@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { JobDetails } from "../../../../../../../services/interfaces/portfolio-service-interfaces";
+import { ImageObject, JobDetails } from "../../../../../../../services/interfaces/portfolio-service-interfaces";
 import { useAuthContext } from "../../../../../../../hooks/useAuthContext";
 import { portfolioAPI } from "../../../../../../../services/portfolio-service";
 import { useJobsAndProjectsContext } from "../../../../../../../hooks/useJobsAndProjectsContext";
@@ -22,11 +22,11 @@ export const useJobsTemplate = (companyName: string) => {
      * Handler that is used to update the job images in the state and send them to the server
      * @param images array of strings
      */
-    const updateJobImagesHandler = (images: string[]) => {
+    const updateJobImagesHandler = (images: ImageObject[]) => {
         if (job) {
             setJob((oldState) => {
                 if (oldState) {
-                    const newState = { ...oldState, imgUrl: images }
+                    const newState = { ...oldState, images }
                     const updatedJobs = jobs.filter(currJob => currJob.company !== job.company);
                     updatedJobs.push(newState);
 

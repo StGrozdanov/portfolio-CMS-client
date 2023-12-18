@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { useEffect, useState } from "react";
-import { ProjectsDetails } from "../../../../../../../services/interfaces/portfolio-service-interfaces";
+import { ImageObject, ProjectsDetails } from "../../../../../../../services/interfaces/portfolio-service-interfaces";
 import { useAuthContext } from "../../../../../../../hooks/useAuthContext";
 import { portfolioAPI } from "../../../../../../../services/portfolio-service";
 import { useJobsAndProjectsContext } from "../../../../../../../hooks/useJobsAndProjectsContext";
@@ -23,11 +23,11 @@ export const useProjectsTemplate = (projectName: string) => {
      * Handler that is used to update the project images in the state and send them to the server
      * @param images array of strings
      */
-    const updateProjectImagesHandler = (images: string[]) => {
+    const updateProjectImagesHandler = (images: ImageObject[]) => {
         if (project) {
             setProject((oldState) => {
                 if (oldState) {
-                    const newState = { ...oldState, imgUrl: images }
+                    const newState = { ...oldState, images }
                     const updatedProjects = projects
                         .filter(currProject => currProject.title !== project.title);
                     updatedProjects.push(newState);
