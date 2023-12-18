@@ -19,6 +19,8 @@ export const CarouselInputModalContext = createContext<CarouselInputModalContext
 const initialCarouselState: CarouselImage = {
     data: { label: '', linkTitle: '', type: '' },
     imgURL: '',
+    height: 0,
+    width: 0,
 }
 
 export const CarouselInputModalProvider = ({ children }: ContainerProps) => {

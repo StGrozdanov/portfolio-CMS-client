@@ -2,7 +2,7 @@ import { faImage } from '@fortawesome/free-solid-svg-icons';
 import FileUpload from '../../FileUpload/FileUpload';
 import { mountedStyleModal, unmountedStyleModal } from '../utils/modalUnmountAndMountStyle';
 import styles from './InputModal.module.scss';
-import { CarouselImage } from '../../../services/interfaces/portfolio-service-interfaces';
+import { CarouselImage, ImageObject } from '../../../services/interfaces/portfolio-service-interfaces';
 
 interface CarouselInputModalProps {
     content: string,
@@ -20,10 +20,16 @@ export default function CarouselInputModal({
     setCarouselData
 }: CarouselInputModalProps) {
 
-    const onImageUploadHandler = (images: string[]) => {
-        const uploadedImage = images[images.length - 1];
+    const onImageUploadHandler = (carousels: ImageObject[]) => {
+        const uploadedImage = carousels[carousels.length - 1];
+
         setCarouselData((oldState) => {
-            return { ...oldState, imgURL: uploadedImage }
+            return {
+                ...oldState,
+                imgURL: uploadedImage.imgURL,
+                width: uploadedImage.width,
+                height: uploadedImage.height
+            }
         });
     }
 
@@ -40,6 +46,7 @@ export default function CarouselInputModal({
             return { ...oldState }
         });
     };
+
     const updateLabelHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCarouselData((oldState) => {
             oldState.data.label = e.target.value;

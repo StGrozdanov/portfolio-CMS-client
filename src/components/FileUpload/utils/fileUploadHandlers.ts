@@ -32,7 +32,7 @@ export const fileUploadHandler = async ({
     companyName,
     projectTitle
 }: FileUploadHandlerProps): Promise<string[]> => {
-    let result: string[] = [];
+    let result: any[] = [];
     let response;
 
     switch (uploadType) {

@@ -11,7 +11,7 @@ interface FileUploadProps extends InputHTMLAttributes<HTMLInputElement> {
     uploadType: 'uploadCV' | 'updateProjectImage' | 'updateJobImage' | 'addPartners' | 'addCarousel',
     targetResourceTitle?: string,
     limited: boolean,
-    fileUploadCallback?: (results: string[]) => void,
+    fileUploadCallback?: (results: any) => void,
 }
 
 export default function FileUpload({

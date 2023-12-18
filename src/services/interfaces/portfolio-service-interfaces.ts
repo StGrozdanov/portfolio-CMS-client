@@ -6,6 +6,8 @@ export interface CarouselImageData {
 
 export interface CarouselImage {
     imgURL: string,
+    height: number,
+    width: number,
     data: CarouselImageData,
 }
 
@@ -32,7 +34,7 @@ export interface PartnersUpdateResponse {
 }
 
 export interface CarouselsUpdateResponse {
-    carousel_images: string[],
+    carousel_images: ImageObject[],
 }
 
 export interface JobsUpdateResponse {
