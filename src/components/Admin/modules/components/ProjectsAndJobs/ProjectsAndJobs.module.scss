@@ -53,21 +53,28 @@
 }
 
 .icons-container {
+    margin-top: 20px;
     display: flex;
-    position: absolute;
     width: 100%;
     font-size: 1.5rem;
-    top: -20%;
-    justify-content: space-around;
+    justify-content: center;
 
     .add-new {
-        color: darkgreen;
+        color: #483d8bba;
         cursor: pointer;
+
+        &:hover {
+            color: darkgreen;
+        }
     }
-    
+
     .remove {
-        color: darkred;
+        color: #483d8bba;
         cursor: pointer;
+        margin-right: 80px;
+
+        &:hover {
+            color: darkred;
+        }
     }
 }
-

@@ -33,33 +33,33 @@ export default function JobsTemplate({ companyName, typeSetter }: JobsTemplatePr
 
     return (
         <div className="animate__animated animate__fadeInLeft">
-            <section className={styles['basic-info']}>
-                <section className={styles['icons-container']}>
-                    <FontAwesomeIcon
-                        icon={faTrashCan}
-                        className={styles.remove}
-                        onClick={() => {
-                            confirmModal({ title: 'Are you sure you want to delete this project?' })
-                                .then(() => {
-                                    removeJobByCompanyName(job?.company || '');
-                                    typeSetter('job');
-                                })
-                                .catch(() => console.info('action canceled.'))
-                        }}
-                    />
-                    <FontAwesomeIcon
-                        icon={faPlusCircle}
-                        className={styles['add-new']}
-                        onClick={() => {
-                            jobInputModal({
-                                title: 'Add new Job',
-                                updateStateHandler: addJob,
+            <section className={styles['icons-container']}>
+                <FontAwesomeIcon
+                    icon={faTrashCan}
+                    className={styles.remove}
+                    onClick={() => {
+                        confirmModal({ title: 'Are you sure you want to delete this project?' })
+                            .then(() => {
+                                removeJobByCompanyName(job?.company || '');
+                                typeSetter('job');
                             })
-                                .then(() => console.info('confirmed'))
-                                .catch(() => console.info('canceled'))
-                        }}
-                    />
-                </section>
+                            .catch(() => console.info('action canceled.'))
+                    }}
+                />
+                <FontAwesomeIcon
+                    icon={faPlusCircle}
+                    className={styles['add-new']}
+                    onClick={() => {
+                        jobInputModal({
+                            title: 'Add new Job',
+                            updateStateHandler: addJob,
+                        })
+                            .then(() => console.info('confirmed'))
+                            .catch(() => console.info('canceled'))
+                    }}
+                />
+            </section>
+            <section className={styles['basic-info']}>
                 <Input
                     requestHandler={updateJobCompanyNameHandler}
                     placeholder='Company'
