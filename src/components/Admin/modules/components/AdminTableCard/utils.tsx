@@ -2,7 +2,7 @@ export type BrowserIconKey = keyof typeof browserIcons;
 
 export const browserIcons = {
     Chrome: <i className="fa-brands fa-chrome" style={{color: "#e94738"}} />,
-    'Postman Runtime': <i className="fa-solid fa-keyboard" style={{color: "#ff6c37"}} />,
+    PostmanRuntime: <i className="fa-solid fa-keyboard" style={{color: "#ff6c37"}} />,
     Safari: <i className="fa-brands fa-safari" style={{color: "#1e81eb"}} />,
     Firefox: <i className="fa-brands fa-firefox-browser" style={{color: '#f8ad1e'}} />,
     Edge: <i className="fa-brands fa-edge" style={{color: '#579edb'}} />,
