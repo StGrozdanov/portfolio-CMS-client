@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
-import { AnalyticData } from "../../../../services/interfaces/portfolio-service-interfaces";
+import { AnalyticData, BrowserValuesResponse, CountryValuesResponse, DeviceValuesResponse } from "../../../../services/interfaces/portfolio-service-interfaces";
 import { portfolioAPI } from "../../../../services/portfolio-service";
 import { GoogleChartWrapperChartType } from "react-google-charts";
 import moment from "moment";
 
 interface VisitationsHookReponse {
     visitationsData: AnalyticData | undefined,
+    visitationsByCountry: CountryValuesResponse | undefined,
+    visitationsByDevice: DeviceValuesResponse | undefined,
+    visitationsByBrowser: BrowserValuesResponse | undefined,
     chartData: [[string, number]] | undefined,
     chartType: GoogleChartWrapperChartType,
 }
@@ -18,6 +21,9 @@ interface VisitationsHookReponse {
  */
 export function useFetchVisitations(query: number | "today" | "yesterday" | "last7days" | "last30days" | "last90days" | "lastYear"): VisitationsHookReponse {
     const [visitationsData, setVisitationsData] = useState<AnalyticData>();
+    const [visitationsByCountry, setvisitationsByCountry] = useState<CountryValuesResponse>();
+    const [visitationsByDevice, setvisitationsByDevice] = useState<DeviceValuesResponse>();
+    const [visitationsByBrowser, setvisitationsByBrowser] = useState<BrowserValuesResponse>();
     const [chartData, setChartData] = useState<[[string, number]]>();
     const { token } = useAuthContext();
 
@@ -29,9 +35,12 @@ export function useFetchVisitations(query: number | "today" | "yesterday" | "las
     useEffect(() => {
         const analytics = portfolioAPI.getAnalythics(query, token);
         const todayVisitations = portfolioAPI.getAnalythicsForTodayCount(token);
+        const allVisitationsByCountry = portfolioAPI.getAnalythicsByCountry(token);
+        const allVisitationsByDevice = portfolioAPI.getAnalythicsByDevice(token);
+        const allVisitationsByBrowser = portfolioAPI.getAnalythicsByBrowser(token);
 
         Promise
-            .all([analytics, todayVisitations])
+            .all([analytics, todayVisitations, allVisitationsByCountry, allVisitationsByDevice, allVisitationsByBrowser])
             .then(response => {
                 const chartResult: any = [["Date", "Visitations"]];
                 let visitationsCountForTheDate = 1;
@@ -67,6 +76,10 @@ export function useFetchVisitations(query: number | "today" | "yesterday" | "las
                         todayVisitationCount: visitationsTodayCount.count
                     }
                 );
+
+                setvisitationsByCountry(response[2]);
+                setvisitationsByDevice(response[3]);
+                setvisitationsByBrowser(response[4]);
             })
             .catch(err => console.error(err));
     }, [query]);
@@ -74,6 +87,9 @@ export function useFetchVisitations(query: number | "today" | "yesterday" | "las
     return {
         visitationsData,
         chartData,
-        chartType
+        chartType,
+        visitationsByCountry,
+        visitationsByDevice,
+        visitationsByBrowser,
     };
 }

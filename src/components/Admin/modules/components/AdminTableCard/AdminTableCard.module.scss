@@ -1,0 +1,73 @@
+.stats-card {
+    border: 2px solid white;
+    background: white;
+    border-radius: 20px;
+    margin-top: 20px;
+    width: 20vw;
+    min-height: 45vh;
+    max-height: 45vh;
+    box-shadow: 2px 20px 20px 0px #808ada61;
+    position: relative;
+    z-index: 1;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    &::after {
+        border: 1px solid white;
+        content: '';
+        width: 90%;
+        position: absolute;
+        left: 11px;
+        height: 15px;
+        border-radius: 20px;
+        bottom: -7px;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        padding-left: 20px;
+        font-weight: 800;
+
+        li {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+
+            i {
+                font-size: 1.2rem;
+            }
+
+            .country-flag {
+                font-size: 1.6rem;
+            }
+
+            .content {
+                margin-right: 10px;
+                margin-left: 7px;
+            }
+
+            .count {
+                font-weight: 500;
+            }
+
+        }
+    }
+}
+
+.heading-section {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #d7d9ef;
+    text-align: center;
+    padding: 10px;
+    font-weight: 900;
+
+    h4 {
+        font-size: 0.8rem;
+        margin: 5px 0;
+        text-align: center;
+    }
+}

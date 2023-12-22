@@ -126,7 +126,7 @@ export interface ProjectsDetails {
 }
 
 export interface AnalyticsFilter {
-    query: 'today' | 'yesterday' | 'last7days' | 'last30days' | 'last90days' | 'lastYear' | number 
+    query: 'today' | 'yesterday' | 'last7days' | 'last30days' | 'last90days' | 'lastYear' | number
 }
 
 export interface AnalyticsResponse {
@@ -155,4 +155,32 @@ export interface VisitationCountResponse {
 
 export interface AnalyticData extends AnalyticsResponse {
     todayVisitationCount: number,
+}
+
+export interface CountryValues {
+    country: string,
+    code: string,
+    count: number,
+}
+
+export interface BrowserValues {
+    browser: string,
+    count: number,
+}
+
+export interface DeviceValues {
+    device: string,
+    count: number,
+}
+
+export interface CountryValuesResponse {
+    analytics: CountryValues[]
+}
+
+export interface BrowserValuesResponse {
+    analytics: BrowserValues[]
+}
+
+export interface DeviceValuesResponse {
+    analytics: DeviceValues[]
 }

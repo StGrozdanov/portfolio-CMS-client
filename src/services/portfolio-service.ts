@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AboutMeResponse, BasicInfoResponse, JobsAndProjectsResponse, SocialsResponse, LoginResponse, AuthData, AnalyticsResponse, VisitationCountResponse, BasicUserInfo, PartnersUpdateResponse, CarouselsUpdateResponse, JobsUpdateResponse, ProjectsUpdateResponse, AboutMeRequest, SocialMediaInput, JobsAndProjectsInput } from "./interfaces/portfolio-service-interfaces";
+import { AboutMeResponse, BasicInfoResponse, JobsAndProjectsResponse, SocialsResponse, LoginResponse, AuthData, AnalyticsResponse, VisitationCountResponse, BasicUserInfo, PartnersUpdateResponse, CarouselsUpdateResponse, JobsUpdateResponse, ProjectsUpdateResponse, AboutMeRequest, SocialMediaInput, JobsAndProjectsInput, CountryValuesResponse, DeviceValuesResponse, BrowserValuesResponse } from "./interfaces/portfolio-service-interfaces";
 
 const portfolioApiInstance = axios.create({
     baseURL: process.env.REACT_APP_PORTFOLIO_SERVICE_URL,
@@ -37,7 +37,7 @@ export const portfolioAPI = {
             url: '/users/socials'
         });
         const result = await response.data;
-        return result  ? result : Promise.reject('No response returned from the API');
+        return result ? result : Promise.reject('No response returned from the API');
     },
     authenticate: async (data: AuthData): Promise<LoginResponse> => {
         const response = await portfolioApiInstance.request({
@@ -61,6 +61,33 @@ export const portfolioAPI = {
         const response = await portfolioApiInstance.request({
             method: "GET",
             url: `/analytics/count`,
+            headers: { 'X-Authorization': authToken }
+        });
+        const result = await response.data;
+        return result ? result : Promise.reject('No response returned from the API');
+    },
+    getAnalythicsByCountry: async (authToken: string): Promise<CountryValuesResponse> => {
+        const response = await portfolioApiInstance.request({
+            method: "GET",
+            url: `/analytics/country`,
+            headers: { 'X-Authorization': authToken }
+        });
+        const result = await response.data;
+        return result ? result : Promise.reject('No response returned from the API');
+    },
+    getAnalythicsByDevice: async (authToken: string): Promise<DeviceValuesResponse> => {
+        const response = await portfolioApiInstance.request({
+            method: "GET",
+            url: `/analytics/device`,
+            headers: { 'X-Authorization': authToken }
+        });
+        const result = await response.data;
+        return result ? result : Promise.reject('No response returned from the API');
+    },
+    getAnalythicsByBrowser: async (authToken: string): Promise<BrowserValuesResponse> => {
+        const response = await portfolioApiInstance.request({
+            method: "GET",
+            url: `/analytics/browser`,
             headers: { 'X-Authorization': authToken }
         });
         const result = await response.data;

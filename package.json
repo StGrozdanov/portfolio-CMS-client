@@ -44,6 +44,7 @@
     "@types/react-dom": "^18.2.17",
     "animate.css": "^4.1.1",
     "axios": "^1.6.2",
+    "country-flag-icons": "^1.5.9",
     "eslint-plugin-react-func": "^0.1.18",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
