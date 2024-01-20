@@ -13,9 +13,6 @@ export default function Dashboard() {
         visitationsData,
         chartData,
         chartType,
-        visitationsByBrowser,
-        visitationsByCountry,
-        visitationsByDevice,
     } = useFetchVisitations(filter);
 
     return (
@@ -47,15 +44,15 @@ export default function Dashboard() {
             <section style={{ display: 'flex', justifyContent: 'space-around', marginTop: 15, marginBottom: 40, width: '100%' }}>
                 <AdminTableCard
                     heading={'COUNTRIES'}
-                    values={visitationsByCountry?.analytics}
+                    values={visitationsData?.visitationsByCountry}
                 />
                 <AdminTableCard
                     heading={'DEVICES'}
-                    values={visitationsByDevice?.analytics}
+                    values={visitationsData?.visitationsByDevice}
                 />
                 <AdminTableCard
                     heading={'BROWSERS'}
-                    values={visitationsByBrowser?.analytics}
+                    values={visitationsData?.visitationsByBrowser}
                 />
             </section>
         </>

@@ -134,6 +134,9 @@ export interface AnalyticsResponse {
     totalVisitationsCount: number,
     mostPopularCountry: string,
     mostPopularDevice: string,
+    visitationsByCountry: CountryValues[],
+    visitationsByBrowser: BrowserValues[],
+    visitationsByDevice: DeviceValues[],
 }
 
 interface Analytic {

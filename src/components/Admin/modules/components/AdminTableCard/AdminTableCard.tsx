@@ -9,8 +9,6 @@ interface AdminTableCardProps {
 }
 
 export default function AdminTableCard({ heading, values }: AdminTableCardProps) {
-
-
     return (
         <article className={styles["stats-card"]}>
             <section className={styles['heading-section']}>

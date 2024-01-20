@@ -73,7 +73,7 @@ export function useFetchVisitations(query: number | "today" | "yesterday" | "las
                 setVisitationsData(
                     {
                         ...visitationsAnalytics,
-                        todayVisitationCount: visitationsTodayCount.count
+                        todayVisitationCount: visitationsTodayCount.count,
                     }
                 );
 

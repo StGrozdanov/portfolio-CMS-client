@@ -16,7 +16,7 @@ export default function AdminStatsCard({ heading, value, icon }: AdminStatsCardP
                 className={styles["fa-solid fa-file-circle-plus"]}
             />
             <h5>{heading}</h5>
-            <h4>{value}</h4>
+            <h4>{value ? value : 'no visitations'}</h4>
         </article>
     );
 }
