@@ -27,7 +27,22 @@ export const useProjectsTemplate = (projectName: string) => {
         if (project) {
             setProject((oldState) => {
                 if (oldState) {
-                    const newState = { ...oldState, images }
+                    let newState: ProjectsDetails;
+
+                    if (!images[0]?.height) {
+                        const updatedImages = oldState?.images.map((image, index) => ({
+                            ...image,
+                            imgURL: images[index],
+                        })).filter(partner => partner.imgURL) as unknown as ImageObject[];
+
+                        newState = { ...oldState, images: updatedImages };
+                    } else if (oldState.images.length === 1) {
+                        newState = { ...oldState }
+                        images.forEach(image => newState.images.push(image));
+                    } else {
+                        newState = { ...oldState, images }
+                    }
+
                     const updatedProjects = projects
                         .filter(currProject => currProject.title !== project.title);
                     updatedProjects.push(newState);
@@ -46,6 +61,7 @@ export const useProjectsTemplate = (projectName: string) => {
 
                     return newState;
                 }
+                return oldState;
             });
         }
     }

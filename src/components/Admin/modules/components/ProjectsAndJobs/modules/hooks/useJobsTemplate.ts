@@ -1,3 +1,4 @@
+/* eslint max-lines: 0 */
 import { useEffect, useState } from "react";
 import { ImageObject, JobDetails } from "../../../../../../../services/interfaces/portfolio-service-interfaces";
 import { useAuthContext } from "../../../../../../../hooks/useAuthContext";
@@ -26,7 +27,22 @@ export const useJobsTemplate = (companyName: string) => {
         if (job) {
             setJob((oldState) => {
                 if (oldState) {
-                    const newState = { ...oldState, images }
+                    let newState: JobDetails;
+
+                    if (!images[0]?.height) {
+                        const updatedImages = oldState?.images.map((image, index) => ({
+                            ...image,
+                            imgURL: images[index],
+                        })).filter(partner => partner.imgURL) as unknown as ImageObject[];
+
+                        newState = { ...oldState, images: updatedImages };
+                    } else if (oldState.images.length === 1) {
+                        newState = { ...oldState }
+                        images.forEach(image => newState.images.push(image));
+                    } else {
+                        newState = { ...oldState, images }
+                    }
+
                     const updatedJobs = jobs.filter(currJob => currJob.company !== job.company);
                     updatedJobs.push(newState);
 
@@ -44,6 +60,7 @@ export const useJobsTemplate = (companyName: string) => {
 
                     return newState;
                 }
+                return oldState
             });
         }
     }
