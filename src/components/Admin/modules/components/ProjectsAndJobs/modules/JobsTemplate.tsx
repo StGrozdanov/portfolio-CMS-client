@@ -8,6 +8,7 @@ import { useModalContext } from '../../../../../../hooks/useModalContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useJobInputModalContext } from '../../../../../../hooks/useProjectInputModalContext';
+import moment from 'moment';
 
 interface JobsTemplateProps {
     companyName: string,
@@ -78,14 +79,14 @@ export default function JobsTemplate({ companyName, typeSetter }: JobsTemplatePr
                         requestHandler={updateJobStartedAtHandler}
                         placeholder='started at'
                         style={{ width: '100px' }}
-                        defaultValue={job?.started_at.toString()}
+                        defaultValue={moment(job?.started_at, 'YYYY-MM-DD').format('YYYY-MM-DD').toString()}
                     />
                     <legend>to</legend>
                     <Input
                         requestHandler={updateJobEndedAtHandler}
                         placeholder='ended at'
                         style={{ width: '100px' }}
-                        defaultValue={job?.ended_at?.toString()}
+                        defaultValue={moment(job?.ended_at, 'YYYY-MM-DD').format('YYYY-MM-DD').toString()}
                     />
                 </section>
             </section>

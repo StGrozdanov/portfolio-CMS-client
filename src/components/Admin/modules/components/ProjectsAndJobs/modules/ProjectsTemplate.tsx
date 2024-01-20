@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useJobsAndProjectsContext } from "../../../../../../hooks/useJobsAndProjectsContext";
 import { useModalContext } from "../../../../../../hooks/useModalContext";
 import { useProjectInputModalContext } from "../../../../../../hooks/useJobInputModalContext";
+import moment from "moment";
 
 interface ProjectsTemplateProps {
     projectName: string,
@@ -74,14 +75,14 @@ export default function ProjectsTemplate({ projectName, typeSetter }: ProjectsTe
                         requestHandler={updateProjectStartedAtHandler}
                         placeholder='started at'
                         style={{ width: '100px' }}
-                        defaultValue={project?.startedAt.toString()}
+                        defaultValue={moment(project?.startedAt, 'YYYY-MM-DD').format('YYYY-MM-DD').toString()}
                     />
                     <legend>to</legend>
                     <Input
                         requestHandler={updateProjectEndDateHandler}
                         placeholder='ended at'
                         style={{ width: '100px' }}
-                        defaultValue={project?.endedAt?.toString()}
+                        defaultValue={moment(project?.endedAt, 'YYYY-MM-DD').format('YYYY-MM-DD').toString()}
                     />
                 </section>
             </section>

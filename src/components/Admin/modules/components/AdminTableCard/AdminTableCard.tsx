@@ -9,6 +9,8 @@ interface AdminTableCardProps {
 }
 
 export default function AdminTableCard({ heading, values }: AdminTableCardProps) {
+
+
     return (
         <article className={styles["stats-card"]}>
             <section className={styles['heading-section']}>
@@ -19,9 +21,14 @@ export default function AdminTableCard({ heading, values }: AdminTableCardProps)
                     values?.map((value, index) => {
                         if (heading === 'COUNTRIES') {
                             const countries = value as CountryValues;
-
+                            let flagUnicode = 'unknown';
+                            try {
+                                flagUnicode = getUnicodeFlagIcon(countries.code)
+                            } catch (err) {
+                                console.log(err);
+                            }
                             return <li key={countries.code + index}>
-                                <span className={styles['country-flag']}>{getUnicodeFlagIcon(countries.code)}</span>
+                                <span className={styles['country-flag']}>{flagUnicode}</span>
                                 <span className={styles.content}>{countries.country}</span>
                                 <span className={styles.count}>{countries.count}</span>
                             </li>
